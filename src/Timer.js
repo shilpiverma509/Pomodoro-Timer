@@ -6,8 +6,9 @@ class Timer extends React.Component{
         return(
             <div>
                 <p>Session</p>
-                <button >start</button>
-                <button>stop</button>
+                <div>{this.props.displayedMinutes}:{this.props.displayedSeconds}</div>
+                <button onClick = {this.props.onStartTimer} >start/Pause</button>
+                <button onClick = {this.props.onPauseTimer}>stop</button>
                 <button>reset</button>
             </div>
         )

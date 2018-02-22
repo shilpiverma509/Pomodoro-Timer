@@ -36,7 +36,7 @@ class App extends React.Component{
     if(this.state.session<3600){
       this.setState({
         session:this.state.session+60, 
-        countdown:this.state.countdown+60
+        countdown:this.state.session+60
       },()=>
         this.displayTime()
       );
@@ -48,7 +48,7 @@ class App extends React.Component{
     if(this.state.session>900){
       this.setState({
         session:this.state.session-60,
-        countdown:this.state.countdown+60
+        countdown:this.state.session-60
       },()=>this.displayTime());
     }
     //else display an alert you reached the min limit for a work session
@@ -57,7 +57,7 @@ class App extends React.Component{
   handleBreakDecrement(){
     if(this.state.break>300){
       this.setState({
-        break_duration:this.state.break_duration-60 //decrease by 1 minute
+        break_duration:this.state.break_duration-60
       })
     }
     //else alert minimum break time is 5 minutes
@@ -77,14 +77,14 @@ class App extends React.Component{
   }
 
   displayTime(){
-    const countdown = this.state.countdown
+    const countdown = this.state.countdown;
     const minutes = Math.floor(countdown/60);
     const seconds = countdown%60;
     const displayedMinutes= minutes<10?'0'+minutes.toString():minutes.toString();
-    const displayedSeconds = seconds<10?'0'+seconds.toString:seconds.toString();
+    const displayedSeconds = seconds<10?'0'+seconds.toString():seconds.toString();
 
     this.setState({
-      countdown:countdown,
+      countdown,
       displayedMinutes,
       displayedSeconds
     });
@@ -97,8 +97,7 @@ class App extends React.Component{
   }
 
   elapsedTime(){
-    const countdown = this.state.countdown-1;
-    this.displayTime(countdown);
+    this.displayTime(this.state.countdown-1);
   }
 
   //pomodoro session
@@ -109,6 +108,12 @@ class App extends React.Component{
         intervalID:setInterval(this.elapsedTime,1000),
         isPaused:!this.state.paused
       });
+    }
+    else{
+      this.onPauseTimer();
+      this.setState({
+        isPaused:!this.state.isPaused
+      })
     }
   }
 
@@ -121,8 +126,8 @@ class App extends React.Component{
   componentDidUpdate(){
     if((this.state.countdown<0) && (this.state.isSession)){
       this.setState({
-        isSession:!isSession,
-        isBreak:!isBreak,
+        isSession:!this.state.isSession,
+        isBreak:!this.state.isBreak,
         countdown:this.state.break_duration
       },()=>this.displayTime());
     }
@@ -133,10 +138,11 @@ class App extends React.Component{
         isBreak:!this.state.isBreak,
         countdown:this.state.session,
         isPaused:!this.state.isPaused
-      },()=>this.displayTime());
-
-    }
-    }
+      },()=>{
+        this.displayTime();
+        this.onStartTimer();
+    });
+    }}
 
 
   render(){
@@ -144,8 +150,8 @@ class App extends React.Component{
       <div>
         <BreakLength
         break_duration={this.state.break_duration}
-        onBreakLengthIncrement={this.handleIncrement}
-        onBreakLengthDecrement={this.handleDecrement}
+        onBreakIncrement={this.handleBreakIncrement}
+        onBreakDecrement={this.handleBreakDecrement}
          />
         <SessionLength
         session={this.state.session}
@@ -158,6 +164,7 @@ class App extends React.Component{
         displayedMinutes={this.state.displayedMinutes}
         displayedSeconds={this.state.displayedSeconds}
         onPauseTimer={this.onPauseTimer}
+        togglePauseState={this.togglePauseState}
          />
       </div>
     )
