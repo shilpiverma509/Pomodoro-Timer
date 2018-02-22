@@ -31,11 +31,11 @@ class App extends React.Component{
 
 
   
-
+//increase session and countdown by 1 minute 
   handleSessionIncrement(){
     if(this.state.session<3600){
       this.setState({
-        session:this.state.session+60,
+        session:this.state.session+60, 
         countdown:this.state.countdown+60
       },()=>
         this.displayTime()
@@ -57,7 +57,7 @@ class App extends React.Component{
   handleBreakDecrement(){
     if(this.state.break>300){
       this.setState({
-        break_duration:this.state.break_duration-60
+        break_duration:this.state.break_duration-60 //decrease by 1 minute
       })
     }
     //else alert minimum break time is 5 minutes
@@ -76,8 +76,8 @@ class App extends React.Component{
     this.displayTime();
   }
 
-  displayTime(number=this.state.countdown){
-    const countdown = number;
+  displayTime(){
+    const countdown = this.state.countdown
     const minutes = Math.floor(countdown/60);
     const seconds = countdown%60;
     const displayedMinutes= minutes<10?'0'+minutes.toString():minutes.toString();
