@@ -5,11 +5,11 @@ class SessionLength extends React.Component{
         
         const session_length=this.props.session/60;
         return(
-            <div>
-                <p>SessionLength</p>
-                <button onClick={this.props.onSessionDecrement}>-</button>
+            <div className="block">
+            <p>Study</p>
+                <button className="timer-button" onClick={this.props.onSessionDecrement}>-</button>
                 {session_length}
-                <button onClick={this.props.onSessionIncrement}>+</button>
+                <button className="timer-button" onClick={this.props.onSessionIncrement}>+</button>
             </div>
         )
     }

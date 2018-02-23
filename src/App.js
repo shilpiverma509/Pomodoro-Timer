@@ -17,9 +17,9 @@ class App extends React.Component{
       isSession:true,
       isPaused:true,
       isBreak:false,
-      displayedMinutes:'',
-      displayedSeconds:'',
-      alert:''
+      displayedMinutes:1500/60,
+      displayedSeconds:"00",
+      alert:'',
     }
     this.defaultState=this.state;
     this.handleBreakDecrement=this.handleBreakDecrement.bind(this);
@@ -110,11 +110,15 @@ class App extends React.Component{
 
   //pomodoro session
   onStartTimer(){
+    console.log("this",this);
+
     if(this.state.isPaused){
       this.displayTime();
       this.setState({
-        intervalID:setInterval(this.elapsedTime.bind(this),1000),
+        intervalID:setInterval(this.elapsedTime.bind(this),1000
+      ),
         isPaused:!this.state.isPaused
+        
       });
     }
     else{
@@ -137,7 +141,7 @@ class App extends React.Component{
         isSession:!this.state.isSession,
         isBreak:!this.state.isBreak,
         countdown:this.state.break_duration,
-        alert:'Time for a break'
+        alert:'Time for a break',
       },()=>this.displayTime());
     }
     else if(this.state.countdown<0 && this.state.isBreak){
@@ -163,7 +167,10 @@ class App extends React.Component{
 
   render(){
     return(
-      <div>
+      <div className="App">
+      <h1 className="App-title">Pomodoro Timer</h1>
+
+      <div className="break-session-block">
         <BreakLength
         break_duration={this.state.break_duration}
         onBreakIncrement={this.handleBreakIncrement}
@@ -175,6 +182,7 @@ class App extends React.Component{
         onSessionDecrement={this.handleSessionDecrement}
         
          />
+         </div>
         <Timer
         onStartTimer={this.onStartTimer}
         displayedMinutes={this.state.displayedMinutes}
