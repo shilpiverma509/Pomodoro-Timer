@@ -168,31 +168,33 @@ class App extends React.Component{
   render(){
     return(
       <div className="App">
-      <h1 className="App-title">Pomodoro Timer</h1>
+        <div className="App-container">
+          <h1 className="App-title">Pomodoro Timer</h1>
 
-      <div className="break-session-block">
-        <BreakLength
-        break_duration={this.state.break_duration}
-        onBreakIncrement={this.handleBreakIncrement}
-        onBreakDecrement={this.handleBreakDecrement}
-         />
-        <SessionLength
-        session={this.state.session}
-        onSessionIncrement={this.handleSessionIncrement}
-        onSessionDecrement={this.handleSessionDecrement}
-        
-         />
-         </div>
-        <Timer
-        onStartTimer={this.onStartTimer}
-        displayedMinutes={this.state.displayedMinutes}
-        displayedSeconds={this.state.displayedSeconds}
-        onPauseTimer={this.onPauseTimer}
-        togglePauseState={this.togglePauseState}
-        onResetTimer={this.onResetTimer}
-        session={this.state.session}
-        alert={this.state.alert}
-         />
+          <div className="break-session-block">
+            <BreakLength
+            break_duration={this.state.break_duration}
+            onBreakIncrement={this.handleBreakIncrement}
+            onBreakDecrement={this.handleBreakDecrement}
+            />
+            <SessionLength
+            session={this.state.session}
+            onSessionIncrement={this.handleSessionIncrement}
+            onSessionDecrement={this.handleSessionDecrement}
+            
+            />
+            </div>
+            <Timer
+            onStartTimer={this.onStartTimer}
+            displayedMinutes={this.state.displayedMinutes}
+            displayedSeconds={this.state.displayedSeconds}
+            onPauseTimer={this.onPauseTimer}
+            togglePauseState={this.togglePauseState}
+            onResetTimer={this.onResetTimer}
+            session={this.state.session}
+            alert={this.state.alert}
+            />
+        </div>
       </div>
     )
   }

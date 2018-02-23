@@ -6,7 +6,7 @@ class Timer extends React.Component{
         return(
             <div>
                 <p>{this.props.alert}</p>
-                <div className="session-length">{this.props.displayedMinutes}:{this.props.displayedSeconds}</div>
+                <div className="session-length pieChart">{this.props.displayedMinutes}:{this.props.displayedSeconds}</div>
 
                 
                 <button className="button" onClick = {this.props.onStartTimer} >start</button>

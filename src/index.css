@@ -3,5 +3,8 @@ body {
   padding: 0;
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
     font-size: 20px;
+    height: 100%;
+    display: block;  background-color: seashell;
+
   
 }
