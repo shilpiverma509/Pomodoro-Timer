@@ -18,7 +18,8 @@ class App extends React.Component{
       isPaused:true,
       isBreak:false,
       displayedMinutes:'',
-      displayedSeconds:''
+      displayedSeconds:'',
+      alert:''
     }
     this.defaultState=this.state;
     this.handleBreakDecrement=this.handleBreakDecrement.bind(this);
@@ -135,7 +136,8 @@ class App extends React.Component{
       this.setState({
         isSession:!this.state.isSession,
         isBreak:!this.state.isBreak,
-        countdown:this.state.break_duration
+        countdown:this.state.break_duration,
+        alert:'Time for a break'
       },()=>this.displayTime());
     }
     else if(this.state.countdown<0 && this.state.isBreak){
@@ -144,7 +146,9 @@ class App extends React.Component{
         isSession:!this.state.isSession,
         isBreak:!this.state.isBreak,
         countdown:this.state.session,
-        isPaused:!this.state.isPaused
+        isPaused:!this.state.isPaused,
+        alert:'Time to study'
+        
       },()=>{
         this.displayTime();
         this.onStartTimer();
@@ -179,6 +183,7 @@ class App extends React.Component{
         togglePauseState={this.togglePauseState}
         onResetTimer={this.onResetTimer}
         session={this.state.session}
+        alert={this.state.alert}
          />
       </div>
     )
